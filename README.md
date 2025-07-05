@@ -2,7 +2,7 @@
 
 > A lightweight, extensible DAG engine built from scratch in TypeScript. Designed to model dependencies, pipelines, and smart scheduling logic without using external graph libraries.
 
-This project is inspired by tools like [Motion](https://usemotion.com/) and [Notion AI](https://www.notion.so/product/ai), aiming to build the foundational logic for intelligent systems that manage tasks, workflows, or knowledge graphs with dependencies.
+This project marks the beginning of my exploration into DAGs and graph algorithms; and how they can form as essential building blocks for creating intelligent, dependency-aware systems. My goal is to understand how tools like Motion model tasks and dependencies under the hood, so that I can eventually build my own version powered by similar principles.
 
 ## 🧠 What Is It?
 
