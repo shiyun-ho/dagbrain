@@ -68,11 +68,42 @@ For each vertex `u`:
 Push root node (first node visited) onto `S`.
 While stack `S` is not empty:
     Pop first element, `u`, in S.
+    Mark first element, `u`, to be true. 
     If `u.visited` = false, then:
         `u.visited` = true
         For each unvisited neighbour `w` of `u`:
             Push `w` into Stack `S`
 End process when all nodes have been visited. 
+```
+
+--- 
+
+## Implementing Recursive DFS algorithm for Cycle Detection
+
+### Function Prototype
+```ts
+private hasCycleDFS(
+    node: ft_Node<T>,
+    visited: Set<number>,
+    recursionStack: Set<number>
+): boolean
+```
+
+### Pseudocode
+```markdown
+if node has been visited:
+    return; # No need to re-traverse
+else:
+    Mark node as visited
+    Add node to current recursion path
+for each neighbor of current node:
+    call hasCycleDFS() recursively on neighbour:
+        if recursive call returns true:
+            Propogate `true` up
+            Cycle found
+After all neighbors explored:
+    Remove node from recursion path
+    Return `false`
 ```
 
 
