@@ -21,15 +21,20 @@ class directedAcyclicGraph<T> {
     addNode(data: T): ft_Node<T> {
         const nodeToAdd = new ft_Node(data);
         this.nodes.set(nodeToAdd.id, nodeToAdd);
+
         return nodeToAdd;
     }
 
     removeNode(id: number): boolean {
         const nodeToRemove = this.nodes.get(id);
         if (!nodeToRemove) return false;
-        // TODO: Remove its edges from other nodes
+
+        for (const [_, node] of this.nodes) {
+            if (node.neighbours.has(nodeToRemove)) {
+                node.neighbours.delete(nodeToRemove);
+            }
+        }
         this.nodes.delete(id);
-        // TODO: Remove references from other nodes' neighbours to avoid dangling references
         return true;
     }
 
