@@ -29,6 +29,7 @@ class directedAcyclicGraph<T> {
         if (!nodeToRemove) return false;
         // TODO: Remove its edges from other nodes
         this.nodes.delete(id);
+        // TODO: Remove references from other nodes' neighbours to avoid dangling references
         return true;
     }
 
@@ -41,6 +42,18 @@ class directedAcyclicGraph<T> {
         }
     
         source.neighbours.add(target);
+        return true;
+    }
+
+    removeEdge(source: ft_Node<T>, target: ft_Node<T>): boolean {
+        if (!this.nodes.has(source.id) || !this.nodes.has(target.id)) {
+            return false;
+        } 
+        if (!source.neighbours.has(target)) {
+            return false;
+        }
+
+        source.neighbours.delete(target);
         return true;
     }
 
@@ -67,6 +80,23 @@ class directedAcyclicGraph<T> {
             recursionStack.delete(startNodeId);
         }
         return false;
+    }
+
+    // TODO: Implement hasCycle() method to check whole graph for cycles independently
+    // For validation and debugging
+    hasCycle(): boolean {
+        return false;
+    }
+
+    // TODO: Implement topological sort
+    /**
+     * Approach 1: Modify DFS to record post-order traversal -> reverse it
+     * Approach 2: Use Kahn's algorithm with in-degree tracking
+     */
+
+    // TODO: Implement visualisation tool to help with debugging
+    printGraph(): void {
+
     }
 
 }
