@@ -94,14 +94,26 @@ class directedAcyclicGraph<T> {
     }
 
     // TODO: Implement topological sort
-    /**
-     * Approach 1: Modify DFS to record post-order traversal -> reverse it
-     * Approach 2: Use Kahn's algorithm with in-degree tracking
-     */
+    // TODO: Modify DFS to record post-order traversal -> reverse it
+    topologicalSortByDFS(): void {
 
-    // TODO: Implement visualisation tool to help with debugging
+    }
+
+    // TODO: Use Kahn's algorithm with in-degree tracking
+    topologicalSortByKahnAlgo(): void {
+
+    }
+
     printGraph(): void {
+        for (const [i, node] of this.nodes) {
+            const neighbourIds = [...node.neighbours].map(n => n.id);
+            console.log(`Node ${i} -> [${neighbourIds}]`);
+        }
+    }
 
+    // TODO: Return JSON-like representation
+    serialize(): string {
+        return "";
     }
 
 }
