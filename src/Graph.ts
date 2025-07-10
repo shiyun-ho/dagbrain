@@ -111,9 +111,15 @@ class directedAcyclicGraph<T> {
         }
     }
 
-    // TODO: Return JSON-like representation
     serialize(): string {
-        return "";
+        const serializedGraph: { [key: number]: number[] } = [];
+
+        for (const [id, node] of this.nodes){
+            const neighbourIds = [...node.neighbours].map(n => n.id);
+            serializedGraph[id] = neighbourIds; 
+        }
+
+        return JSON.stringify(serializedGraph, null, 2);
     }
 
 }
