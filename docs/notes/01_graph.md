@@ -106,6 +106,27 @@ After all neighbors explored:
     Return `false`
 ```
 
+---
+## Implementing Topological Sort
+
+### Pseudocode for DFS
+```markdown 
+function topsort(graph):
+    N = graph.numberOfNodes()
+    V = [false, ..., false]
+    ordering = [0,...,0]
+    i = N - 1
+
+    for (at = 0; at < N; at++):
+        if V[at] == false:
+            visitedNodes = []
+            dfs(at, V, visitedNodes, graph)
+            for nodeId in visitedNodes:
+                ordering[i] = nodeId
+                i = i - 1
+    return ordering
+```
+
 
 
 
