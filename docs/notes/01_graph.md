@@ -109,22 +109,71 @@ After all neighbors explored:
 ---
 ## Implementing Topological Sort
 
+### Concepts
+
+Reference: [Topological Sort of Directed Acyclic Graph](https://www.baeldung.com/cs/dag-topological-sort)
+
+- A topological sort of a DAG is a linear ordering of all its vertices such that if it contains an edge (u, v), then u appears before v in the ordering. 
+- For a DAG, we can construct a topological sort with running time linear to the number of vertices plus the number of edges, which is O(V+E).
+
+### Kahn's Algorithm
+- In a DAG, any path between two vertices has a finite length as the graph does not contain a cycle. 
+- Let P be the longest path of u (source vertex) to v (destination vertex).
+- Since P is the longest path, there can be no incoming edge to u.
+- <b>Therefore</b>, a DAG contains <b>at least one vertext that has <u>no incoming edge</u></b>.
+
+### Pseudocode for Kahn's Algorithm
+- A topological sort on a DAG can be constructed by finding vertices that have no incoming edges:
+
+```markdown
+algorithm KahnsAlgorithm(G):
+    /**
+    * @input: G = A Directed Acyclic Graph (DAG)
+    * @output: L = A topological sort of all vertices in G
+    **/
+
+    Compute in-degree for each vertex in G
+    Initialise a queue Q with all vertices of in-degree 0
+
+    Initialise an empty vertex list L
+
+    while Q is not empty:
+        u <- remove a vertex from Q
+        add u to the end of L
+        for each neighbouring node v of u:
+            decrease the in-degree of v by 1
+            if the in-degree of v is 0:
+                add v to Q
+    
+    return L
+```
+
+- Time Complexity: O(V+E) for in-degree calculations
+
+
 ### Pseudocode for DFS
 ```markdown 
-function topsort(graph):
-    N = graph.numberOfNodes()
-    V = [false, ..., false]
-    ordering = [0,...,0]
-    i = N - 1
+algorithm DFSTopologicalSort(G):
+    /**
+    * @input: G = A Directed Acyclic Graph (DAG)
+    * @output: L = A topological sort of all vertices in G
+    **/
 
-    for (at = 0; at < N; at++):
-        if V[at] == false:
-            visitedNodes = []
-            dfs(at, V, visitedNodes, graph)
-            for nodeId in visitedNodes:
-                ordering[i] = nodeId
-                i = i - 1
-    return ordering
+    L <- initalise an empty vertext list
+    visited <- initialialise an array to false for each vertex
+
+    for each vertex u in G:
+        if not visited[u]:
+            topologicalSortRecursive(u)
+    
+    return L
+
+function topologicalSortRecursive(u):
+    visited[u] = true
+    for each neighbouring vertex v of u:
+        if not visited[u]:
+            topologicalSortRecursive(v)
+    add u to the front of L
 ```
 
 
